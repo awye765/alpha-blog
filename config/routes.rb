@@ -6,6 +6,13 @@ Rails.application.routes.draw do
   # Sets the default page to the homepage
   
   get 'about', to: 'pages#about'
+  
+  resources :articles
+  
+  # The above gives a new article path, a post to create articles, an edit
+  # article path, a patch to update articles, delete article path, show article
+  # path and index article path.  All of the paths it gives us by simply saying
+  # resources :articles
 
   # You can have the root of your site routed with "root"
   # root 'welcome#index'
