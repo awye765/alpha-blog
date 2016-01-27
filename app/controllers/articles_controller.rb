@@ -4,6 +4,10 @@ class ArticlesController < ApplicationController
         # This does ...
     end
     
+    def edit
+        @article = Article.find(params[:id])
+    end
+    
     def create
         
         @article = Article.new(article_params)
@@ -19,7 +23,18 @@ class ArticlesController < ApplicationController
             # If the validation of input fails, it will render a new template
             # to allow the user to try again,
         end
-        
+    
+    end
+    
+    def update
+      @article = Article.find(params[:id])
+      if @article.update(article_params)
+          flash[:notice] = "Article was successfully updated"
+          redirect_to article_path(@article)
+      else
+          render 'edit'
+      end
+     
     end
     
     def show
