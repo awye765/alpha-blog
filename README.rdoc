@@ -1,1 +1,3 @@
 This the repository for the first alpha-blog app of the Complete Ruby on Rails Developer Course.
+
+Current production version: https://alpha-blog-wyedawg.herokuapp.com/
