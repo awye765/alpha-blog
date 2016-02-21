@@ -9,6 +9,11 @@ Rails.application.routes.draw do
   
   resources :articles
   
+  get 'signup', to: "users#new"
+  
+  resources :users, except: [:new]
+  # This gets all the routes EXCEPT the new user route
+  
   # The above gives a new article path, a post to create articles, an edit
   # article path, a patch to update articles, delete article path, show article
   # path and index article path.  All of the paths it gives us by simply saying
