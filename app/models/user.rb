@@ -16,4 +16,7 @@ class User < ActiveRecord::Base
                 uniqueness: { case_sensitive: false },
                 format: { with: VALID_EMAIL_REGEX }
                 # The above is going to check for valid format of email inputs.
+                
+    has_secure_password
+    
 end
