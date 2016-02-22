@@ -12,6 +12,11 @@ Rails.application.routes.draw do
   get 'signup', to: "users#new"
   
   resources :users, except: [:new]
+  
+  get 'login', to: 'sessions#new'
+  post 'login', to: 'sessions#create'
+  delete 'logout', to: 'sessions#destroy'
+  
   # This gets all the routes EXCEPT the new user route
   
   # The above gives a new article path, a post to create articles, an edit
