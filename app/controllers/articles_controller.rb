@@ -5,6 +5,17 @@ class ArticlesController < ApplicationController
     # and only applies that article setting to the edit, update, show
     # and destroy methods.
     
+    before_action :require_user, except: [:index, :show]
+    # Restriction #1 - requires a logged in user for all actions except 
+    # index and show.  This prevents logged out users or non-users from
+    # acessing the create, edit, update and delete actions by typing in the
+    # relevant url path.
+    
+    before_action :require_same_user, only: [:edit, :update, :destroy]
+    # Restriction #2 - requires the logged in user that created the article
+    # for the edit, update and destroy actions.  This prevents other logged in
+    # users from deliberately/inadvertently messing up another user's articles.
+    
     def index
         @articles = Article.paginate(page: params[:page], per_page: 5)    
     end
@@ -68,4 +79,11 @@ class ArticlesController < ApplicationController
             params.require(:article).permit(:title, :description)
         end
 
+        def require_same_user
+            if current_user != @article.user
+                flash[:danger] = "You can only edit or delete your own articles"
+                redirect_to root_path
+            end
+        end
+    
 end
